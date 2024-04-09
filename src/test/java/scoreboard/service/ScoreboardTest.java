@@ -19,6 +19,24 @@ class ScoreboardTest {
     }
 
     @Test
+    void testShouldThrowExceptionWhenStartingAlreadyExistingMatchToTheScoreboard() {
+        //Arrange
+        Scoreboard scoreboard = new Scoreboard();
+        Team homeTeam = new Team("Poland");
+        Team awayTeam = new Team("Germany");
+        scoreboard.startMatch(homeTeam, awayTeam);
+
+        //Assertion
+        Exception exception = assertThrows(DuplicatedMatchException.class, () -> scoreboard.startMatch(homeTeam, awayTeam));
+
+        String expectedMessage = "Match for home team Poland and away team Germany is already in progress";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+
+    @Test
     void testUniqueMatchStartedInScoreboardShouldBeAddedToTheScoreboard() throws MatchNotFoundException {
         //Arrange
         Scoreboard scoreboard = new Scoreboard();
