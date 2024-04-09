@@ -1,5 +1,7 @@
 package scoreboard.model;
 
+import java.util.Objects;
+
 public class Match {
     private final Team homeTeam;
     private final Team awayTeam;
@@ -27,6 +29,24 @@ public class Match {
 
     public int getAwayTeamScore() {
         return awayTeamScore;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Match)) {
+            return false;
+        }
+        Match other = (Match)o;
+
+        return this.homeTeam.equals(other.homeTeam) && this.awayTeam.equals(other.awayTeam);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(homeTeam, awayTeam);
     }
 
 }
