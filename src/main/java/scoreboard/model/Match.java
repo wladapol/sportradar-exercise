@@ -33,20 +33,17 @@ public class Match {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof Match)) {
-            return false;
-        }
-        Match other = (Match)o;
-
-        return this.homeTeam.equals(other.homeTeam) && this.awayTeam.equals(other.awayTeam);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Match match = (Match) o;
+        return homeTeamScore == match.homeTeamScore
+                && awayTeamScore == match.awayTeamScore
+                && Objects.equals(homeTeam, match.homeTeam)
+                && Objects.equals(awayTeam, match.awayTeam);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(homeTeam, awayTeam);
+        return Objects.hash(homeTeam, awayTeam, homeTeamScore, awayTeamScore);
     }
-
 }

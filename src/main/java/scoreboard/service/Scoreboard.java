@@ -24,6 +24,8 @@ public class Scoreboard {
     }
 
     public Match findMatch(Team homeTeam, Team awayTeam) {
-        return matches.get(matches.indexOf(new Match(homeTeam, awayTeam)));
+        return matches.stream()
+                .filter(match -> match.getHomeTeam().equals(homeTeam) && match.getAwayTeam().equals(awayTeam))
+                .findFirst().get();
     }
 }
