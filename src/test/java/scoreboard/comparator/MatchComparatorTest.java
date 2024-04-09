@@ -3,6 +3,7 @@ package scoreboard.comparator;
 import org.junit.jupiter.api.Test;
 import scoreboard.exception.NegativeScoreNumberException;
 import scoreboard.model.Match;
+import scoreboard.model.Team;
 
 import java.time.LocalDateTime;
 
@@ -10,9 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MatchComparatorTest {
 
+    public MatchComparator comparator = new MatchComparator();
+
     public static Match createMatch(String homeTeamName, String awayTeamName, int homeTeamScore, int awayTeamScore, LocalDateTime startDate) throws NegativeScoreNumberException {
-        return null;
+        Team homeTeam = new Team(homeTeamName);
+        Team awayTeam = new Team(awayTeamName);
+        Match match = new Match(homeTeam, awayTeam);
+        match.updateScore(homeTeamScore, awayTeamScore);
+        match.setStartDate(startDate);
+        return match;
     }
+
 
     @Test
     void testMatchComparatorWithDifferentTotalScore() throws NegativeScoreNumberException {
@@ -21,7 +30,7 @@ public class MatchComparatorTest {
         Match secondMatch = createMatch("France", "Spain", 3,0,LocalDateTime.of(2024, 1,2, 10,0,0));
 
         //Act
-        int result = MatchComparator.compare(firstMatch, secondMatch)
+        int result = comparator.compare(firstMatch, secondMatch);
 
         //Assert
         assertTrue(result > 0);
@@ -34,7 +43,7 @@ public class MatchComparatorTest {
         Match secondMatch = createMatch("France", "Spain", 0,4,LocalDateTime.of(2024, 1,2, 10,0,0));
 
         //Act
-        int result = MatchComparator.compare(firstMatch, secondMatch)
+        int result = comparator.compare(firstMatch, secondMatch);
 
         //Assert
         assertTrue(result < 0);

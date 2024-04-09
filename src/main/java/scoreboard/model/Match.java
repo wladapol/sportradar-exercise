@@ -2,6 +2,7 @@ package scoreboard.model;
 
 import scoreboard.exception.NegativeScoreNumberException;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Match {
@@ -9,12 +10,14 @@ public class Match {
     private final Team awayTeam;
     private int homeTeamScore;
     private int awayTeamScore;
+    private LocalDateTime startDate;
 
     public Match(Team homeTeam, Team awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeTeamScore = 0;
         this.awayTeamScore = 0;
+        this.startDate = LocalDateTime.now();
     }
 
     public void updateScore(int homeTeamScore, int awayTeamScore) throws NegativeScoreNumberException {
@@ -40,6 +43,14 @@ public class Match {
 
     public int getAwayTeamScore() {
         return awayTeamScore;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
     @Override
