@@ -1,5 +1,6 @@
 package scoreboard.service;
 
+import scoreboard.exception.MatchNotFoundException;
 import scoreboard.model.Match;
 import scoreboard.model.Team;
 
@@ -23,9 +24,9 @@ public class Scoreboard {
         return match;
     }
 
-    public Match findMatch(Team homeTeam, Team awayTeam) {
+    public Match findMatch(Team homeTeam, Team awayTeam) throws MatchNotFoundException {
         return matches.stream()
                 .filter(match -> match.getHomeTeam().equals(homeTeam) && match.getAwayTeam().equals(awayTeam))
-                .findFirst().get();
+                .findFirst().orElseThrow(() -> new MatchNotFoundException(homeTeam, awayTeam));
     }
 }

@@ -1,6 +1,7 @@
 package scoreboard.service;
 
 import org.junit.jupiter.api.Test;
+import scoreboard.exception.MatchNotFoundException;
 import scoreboard.model.Match;
 import scoreboard.model.Team;
 
@@ -18,7 +19,7 @@ class ScoreboardTest {
     }
 
     @Test
-    void testUniqueMatchStartedInScoreboardShouldBeAddedToTheScoreboard() {
+    void testUniqueMatchStartedInScoreboardShouldBeAddedToTheScoreboard() throws MatchNotFoundException {
         //Arrange
         Scoreboard scoreboard = new Scoreboard();
         Team homeTeam = new Team("Poland");
