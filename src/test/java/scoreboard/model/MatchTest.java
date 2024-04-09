@@ -39,6 +39,7 @@ class MatchTest {
         assertEquals(3, match.getAwayTeamScore());
     }
 
+    @Test
     void testShouldThrowExceptionWhenUpdatingScoreToNegativeNumber() {
         //Arrange
         Team homeTeam = new Team("Poland");
