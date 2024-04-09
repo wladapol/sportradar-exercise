@@ -2,9 +2,6 @@ package scoreboard.model;
 
 import org.junit.jupiter.api.Test;
 import scoreboard.exception.NegativeScoreNumberException;
-
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
