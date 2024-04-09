@@ -1,5 +1,6 @@
 package scoreboard.service;
 
+import scoreboard.comparator.MatchComparator;
 import scoreboard.exception.DuplicatedMatchException;
 import scoreboard.exception.MatchNotFoundException;
 import scoreboard.model.Match;
@@ -38,6 +39,12 @@ public class Scoreboard {
             throw new MatchNotFoundException(match.getHomeTeam(), match.getAwayTeam());
         }
         matches.remove(match);
+    }
+
+    public List<Match> calculateSummary() {
+        List<Match> sortedMatches = new LinkedList<>(matches);
+        sortedMatches.sort(new MatchComparator().reversed());
+        return sortedMatches;
     }
 
     private boolean verifyIfMatchAlreadyExists(Team homeTeam, Team awayTeam) {
