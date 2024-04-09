@@ -3,6 +3,7 @@ package scoreboard.model;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MatchTest {
 
@@ -23,7 +24,7 @@ class MatchTest {
     }
 
     @Test
-    void testUpdateScoreForMatch() {
+    void testUpdateScoreForMatch() throws NegativeScoreNumberException {
         //Arrange
         Team homeTeam = new Team("Poland");
         Team awayTeam = new Team("Germany");
@@ -35,6 +36,24 @@ class MatchTest {
         //Assertion
         assertEquals(2, match.getHomeTeamScore());
         assertEquals(3, match.getAwayTeamScore());
+    }
+
+    void testShouldThrowExceptionWhenUpdatingScoreToNegativeNumber() {
+        //Arrange
+        Team homeTeam = new Team("Poland");
+        Team awayTeam = new Team("Germany");
+        Match match = new Match(homeTeam, awayTeam);
+
+        //Assertion
+        Exception exception = assertThrows(NegativeScoreNumberException.class, () -> match.updateScore(-2, 3));
+
+        String expectedMessage = "Score number -2 or/and 3 is negative";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+
+
+
     }
 
 
