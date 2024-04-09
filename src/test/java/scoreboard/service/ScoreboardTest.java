@@ -42,12 +42,12 @@ class ScoreboardTest {
         Team awayTeam = new Team("Germany");
 
         //Assert
-        Exception exception = assertThrows(MatchNotFoundException.class, () -> {
-            scoreboard.findMatch(homeTeam, awayTeam);
-        });
+        Exception exception = assertThrows(MatchNotFoundException.class, () -> scoreboard.findMatch(homeTeam, awayTeam));
 
         String expectedMessage = "Have not found match for home team Poland and away team Germany";
         String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
     }
 
 }
