@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import scoreboard.model.Match;
 import scoreboard.model.Team;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ScoreboardTest {
 
@@ -32,6 +31,22 @@ class ScoreboardTest {
         //Assert
         assertEquals(scoreboard.findMatch(homeTeam, awayTeam), match);
 
+    }
+
+    @Test
+    void testShouldThrowExceptionWhenCantFindNonExistingMatchInScoreboard() {
+        //Arrange
+        Scoreboard scoreboard = new Scoreboard();
+        Team homeTeam = new Team("Poland");
+        Team awayTeam = new Team("Germany");
+
+        //Assert
+        Exception exception = assertThrows(MatchNotFoundException.class, () -> {
+            scoreboard.findMatch(homeTeam, awayTeam);
+        });
+
+        String expectedMessage = "Have not found match for home team Poland and away team Germany";
+        String actualMessage = exception.getMessage();
     }
 
 }
