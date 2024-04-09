@@ -10,15 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MatchTest {
 
-    public static Match createMatch(String homeTeamName, String awayTeamName, int homeTeamScore, int awayTeamScore, LocalDateTime startDate) throws NegativeScoreNumberException {
-        Team homeTeam = new Team(homeTeamName);
-        Team awayTeam = new Team(awayTeamName);
-        Match match = new Match(homeTeam, awayTeam);
-        match.updateScore(homeTeamScore, awayTeamScore);
-        match.setStartDate(startDate);
-        return match;
-    }
-
     @Test
     void testNewMatchInitialScores() {
         //Arrange
