@@ -1,5 +1,7 @@
 package scoreboard.model;
 
+import scoreboard.exception.NegativeScoreNumberException;
+
 import java.util.Objects;
 
 public class Match {
@@ -14,6 +16,15 @@ public class Match {
         this.homeTeamScore = 0;
         this.awayTeamScore = 0;
     }
+
+    public void updateScore(int homeTeamScore, int awayTeamScore) throws NegativeScoreNumberException {
+        if (homeTeamScore < 0 || awayTeamScore < 0) {
+            throw new NegativeScoreNumberException(homeTeamScore, awayTeamScore);
+        }
+        this.homeTeamScore = homeTeamScore;
+        this.awayTeamScore = awayTeamScore;
+    }
+
 
     public Team getHomeTeam() {
         return homeTeam;
