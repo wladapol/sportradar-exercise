@@ -1,6 +1,7 @@
 package scoreboard.service;
 
 import org.junit.jupiter.api.Test;
+import scoreboard.exception.DuplicatedMatchException;
 import scoreboard.exception.MatchNotFoundException;
 import scoreboard.model.Match;
 import scoreboard.model.Team;
@@ -19,7 +20,7 @@ class ScoreboardTest {
     }
 
     @Test
-    void testShouldThrowExceptionWhenStartingAlreadyExistingMatchToTheScoreboard() {
+    void testShouldThrowExceptionWhenStartingAlreadyExistingMatchToTheScoreboard() throws DuplicatedMatchException {
         //Arrange
         Scoreboard scoreboard = new Scoreboard();
         Team homeTeam = new Team("Poland");
@@ -37,7 +38,7 @@ class ScoreboardTest {
 
 
     @Test
-    void testUniqueMatchStartedInScoreboardShouldBeAddedToTheScoreboard() throws MatchNotFoundException {
+    void testUniqueMatchStartedInScoreboardShouldBeAddedToTheScoreboard() throws MatchNotFoundException, DuplicatedMatchException {
         //Arrange
         Scoreboard scoreboard = new Scoreboard();
         Team homeTeam = new Team("Poland");

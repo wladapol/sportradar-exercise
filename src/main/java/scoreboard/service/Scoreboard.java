@@ -1,5 +1,6 @@
 package scoreboard.service;
 
+import scoreboard.exception.DuplicatedMatchException;
 import scoreboard.exception.MatchNotFoundException;
 import scoreboard.model.Match;
 import scoreboard.model.Team;
@@ -18,7 +19,10 @@ public class Scoreboard {
         return matches;
     }
 
-    public Match startMatch(Team homeTeam, Team awayTeam) {
+    public Match startMatch(Team homeTeam, Team awayTeam) throws DuplicatedMatchException {
+        if (verifyIfMatchAlreadyExists(homeTeam, awayTeam)) {
+            throw new DuplicatedMatchException(homeTeam, awayTeam);
+        }
         Match match = new Match(homeTeam, awayTeam);
         matches.add(match);
         return match;
@@ -28,5 +32,10 @@ public class Scoreboard {
         return matches.stream()
                 .filter(match -> match.getHomeTeam().equals(homeTeam) && match.getAwayTeam().equals(awayTeam))
                 .findFirst().orElseThrow(() -> new MatchNotFoundException(homeTeam, awayTeam));
+    }
+
+    private boolean verifyIfMatchAlreadyExists(Team homeTeam, Team awayTeam) {
+        return matches.stream()
+                .anyMatch(match -> match.getHomeTeam().equals(homeTeam) && match.getAwayTeam().equals(awayTeam));
     }
 }
