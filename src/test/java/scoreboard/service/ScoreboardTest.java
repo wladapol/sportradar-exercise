@@ -30,7 +30,7 @@ class ScoreboardTest {
         scoreboard.startMatch(homeTeam, awayTeam);
 
         //Assert
-        assertEquals(scoreboard.getMatch(homeTeam, awayTeam), match);
+        assertEquals(scoreboard.findMatch(homeTeam, awayTeam), match);
 
     }
 

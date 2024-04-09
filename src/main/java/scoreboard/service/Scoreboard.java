@@ -23,7 +23,7 @@ public class Scoreboard {
         return match;
     }
 
-    public Match getMatch(Team homeTeam, Team awayTeam) {
+    public Match findMatch(Team homeTeam, Team awayTeam) {
         return matches.get(matches.indexOf(new Match(homeTeam, awayTeam)));
     }
 }
