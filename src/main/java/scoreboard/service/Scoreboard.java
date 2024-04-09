@@ -34,6 +34,13 @@ public class Scoreboard {
                 .findFirst().orElseThrow(() -> new MatchNotFoundException(homeTeam, awayTeam));
     }
 
+    public void finishMatch(Match match) throws MatchNotFoundException {
+        if (!verifyIfMatchAlreadyExists(match.getHomeTeam(), match.getAwayTeam())) {
+            throw new MatchNotFoundException(match.getHomeTeam(), match.getAwayTeam());
+        }
+        matches.remove(match);
+    }
+
     private boolean verifyIfMatchAlreadyExists(Team homeTeam, Team awayTeam) {
         return matches.stream()
                 .anyMatch(match -> match.getHomeTeam().equals(homeTeam) && match.getAwayTeam().equals(awayTeam));
