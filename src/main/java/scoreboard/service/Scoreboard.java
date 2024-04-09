@@ -19,13 +19,12 @@ public class Scoreboard {
         return matches;
     }
 
-    public Match startMatch(Team homeTeam, Team awayTeam) throws DuplicatedMatchException {
+    public void startMatch(Team homeTeam, Team awayTeam) throws DuplicatedMatchException {
         if (verifyIfMatchAlreadyExists(homeTeam, awayTeam)) {
             throw new DuplicatedMatchException(homeTeam, awayTeam);
         }
         Match match = new Match(homeTeam, awayTeam);
         matches.add(match);
-        return match;
     }
 
     public Match findMatch(Team homeTeam, Team awayTeam) throws MatchNotFoundException {
